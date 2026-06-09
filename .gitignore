@@ -1,0 +1,9 @@
+node_modules/
+lib/
+example/node_modules/
+*.tsbuildinfo
+.DS_Store
+*.xcworkspace
+*.xcuserdata
+build/
+DerivedData/

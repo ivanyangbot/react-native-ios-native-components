@@ -1,0 +1,97 @@
+{
+  "name": "rn-ios-native-components",
+  "version": "0.1.0",
+  "description": "iOS native UI components for React Native — all HIG/UIKit components wrapped and ready to use",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "react-native": "src/index.ts",
+  "source": "src/index.ts",
+  "files": [
+    "src",
+    "lib",
+    "ios",
+    "android",
+    "cpp",
+    "rn-ios-native-components.podspec",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
+  ],
+  "scripts": {
+    "typescript": "tsc --noEmit",
+    "build": "bob build",
+    "prepare": "bob build",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "test": "jest"
+  },
+  "keywords": [
+    "react-native",
+    "ios",
+    "native-components",
+    "uikit",
+    "hig",
+    "button",
+    "switch",
+    "slider",
+    "date-picker",
+    "picker",
+    "search-bar",
+    "segmented-control",
+    "action-sheet",
+    "alert",
+    "progress-view",
+    "activity-indicator",
+    "stepper",
+    "page-control",
+    "tab-bar",
+    "navigation-bar",
+    "toolbar",
+    "badge",
+    "context-menu",
+    "tooltip",
+    "refresh-control"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourname/rn-ios-native-components.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "react": "^19.0.0",
+    "react-native": "^0.82.0",
+    "typescript": "^5.8.0",
+    "react-native-builder-bob": "^0.40.0",
+    "@types/react": "^19.0.0"
+  },
+  "codegenConfig": {
+    "name": "RNIOSNativeComponentsSpec",
+    "type": "components",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.rniosnativecomponents"
+    }
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.json"
+        }
+      ]
+    ]
+  }
+}

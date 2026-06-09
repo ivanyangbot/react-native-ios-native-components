@@ -1,0 +1,1 @@
+{"extends": "@react-native/babel-preset", "plugins": []}

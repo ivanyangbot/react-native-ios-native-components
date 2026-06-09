@@ -1,0 +1,10 @@
+# rn-ios-native-components example app
+build/
+.DS_Store
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcuserstate
+xcuserdata
+node_modules/
