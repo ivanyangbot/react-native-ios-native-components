@@ -23,6 +23,7 @@ export { default as IOSShapeView } from './IOSShapeView';
 export { default as IOSScrollView } from './IOSScrollView';
 export { default as IOSCollectionView } from './IOSCollectionView';
 export { default as IOSWebView } from './IOSWebView';
+export { default as IOSGlassEffect } from './IOSGlassEffect';
 
 // ─── Imperative / Overlay Components ────────────────────────────────────────
 export { IOSAlert } from './IOSAlert';

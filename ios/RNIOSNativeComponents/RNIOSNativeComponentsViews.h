@@ -254,4 +254,69 @@ NS_ASSUME_NONNULL_BEGIN
 }
 @end
 
+#pragma mark - IOSGlassEffect (Liquid Glass, iOS 26+)
+
+@interface RNIOSGlassEffectView : UIView
+@property (nonatomic, strong) UIGlassEffectView *glassEffectView;
+@property (nonatomic, copy) UIColor *tintColor;
+@end
+
+@implementation RNIOSGlassEffectView
+- (instancetype)initWithFrame:(CGRect)frame {
+  if (self = [super initWithFrame:frame]) {
+    self.clipsToBounds = YES;
+    _tintColor = nil;
+    _glassEffectView = [[UIGlassEffectView alloc] initWithEffect:[UIGlassEffect effectWithStyle:UIGlassEffectStyleRegular]];
+    if (_glassEffectView) {
+      [self addSubview:_glassEffectView];
+      _glassEffectView.frame = self.bounds;
+      _glassEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    }
+  }
+  return self;
+}
+
+- (void)setTintColor:(UIColor *)tintColor {
+  _tintColor = tintColor;
+  _glassEffectView.tintColor = tintColor;
+}
+
+- (void)setGlassStyle:(NSString *)styleString {
+  UIGlassEffectStyle style = UIGlassEffectStyleRegular;
+  if ([styleString isEqualToString:@"thin"]) style = UIGlassEffectStyleThin;
+  else if ([styleString isEqualToString:@"ultraThin"]) style = UIGlassEffectStyleUltraThin;
+  else if ([styleString isEqualToString:@"regularWithBlur"]) style = UIGlassEffectStyleRegularWithBlur;
+  else if ([styleString isEqualToString:@"thinWithBlur"]) style = UIGlassEffectStyleThinWithBlur;
+  else if ([styleString isEqualToString:@"ultraThinWithBlur"]) style = UIGlassEffectStyleUltraThinWithBlur;
+
+  [_glassEffectView removeFromSuperview];
+  _glassEffectView = [[UIGlassEffectView alloc] initWithEffect:[UIGlassEffect effectWithStyle:style]];
+  _glassEffectView.tintColor = _tintColor;
+  [self insertSubview:_glassEffectView atIndex:0];
+  _glassEffectView.frame = self.bounds;
+  _glassEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+}
+
+- (void)setIsInteractive:(BOOL)isInteractive {
+  // UIGlassEffect.isInteractive controls hover/tap interaction
+  // This property is available on iOS 26+
+  if (@available(iOS 26.0, *)) {
+    [_glassEffectView setValue:@(isInteractive) forKey:@"isInteractive"];
+  }
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  _glassEffectView.frame = self.bounds;
+}
+
+- (void)insertReactSubview:(UIView *)subview atIndex:(NSInteger)atIndex {
+  // Insert subviews above the glass effect view
+  if (subview != _glassEffectView) {
+    [super insertReactSubview:subview atIndex:atIndex + 1];
+  } else {
+    [super insertReactSubview:subview atIndex:atIndex];
+  }
+}
+
 NS_ASSUME_NONNULL_END

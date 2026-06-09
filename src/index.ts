@@ -8,34 +8,9 @@
  * import {
  *   IOSButton,
  *   IOSSwitch,
- *   IOSSlider,
- *   IOSStepper,
- *   IOSProgressView,
- *   IOSActivityIndicator,
- *   IOSDatePicker,
- *   IOSPicker,
- *   IOSSearchBar,
- *   IOSSegmentedControl,
- *   IOSPageControl,
- *   IOSBadge,
- *   IOSPullToRefresh,
- *   IOSTabBar,
- *   IOSNavigationBar,
- *   IOSToolbar,
- *   IOSAlert,
- *   IOSContextMenu,
- *   IOSTooltip,
- *   IOSTextField,
- *   IOSColorWell,
- *   IOSLabel,
- *   IOSImageView,
- *   IOSShapeView,
- *   IOSScrollView,
- *   IOSCollectionView,
- *   IOSWebView,
+ *   IOSGlassEffect,
+ *   // ... all 29 components
  * } from 'rn-ios-native-components';
- *
- * // Also re-exports all types
  * ```
  */
 
@@ -71,23 +46,8 @@ export type {
   IOSScrollViewProps,
   IOSCollectionViewProps,
   IOSWebViewProps,
+  IOSGlassEffectProps,
 } from './types/components';
-
-export {
-  IOSTextStyle,
-  IOSButtonType,
-  IOSButtonSize,
-  IOSDatePickerMode,
-  IOSDatePickerStyle,
-  IOSActivityIndicatorStyle,
-  IOSProgressViewStyle,
-  IOSSearchBarStyle,
-  IOSSegmentedControlStyle,
-  IOSPageControlBackgroundStyle,
-  IOSPickerComponentStyle,
-  IOSAlertStyle,
-  IOSBadgePosition,
-} from './types/common';
 
 export type {
   IOSFontConfig,
@@ -120,3 +80,4 @@ export type {
   IOSSelectionEvent,
   IOSPressEvent,
 } from './types/common';
+

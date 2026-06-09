@@ -570,4 +570,27 @@ RCT_CUSTOM_VIEW_PROPERTY(progressBackgroundColor, UIColor, RNIOSRefreshControl) 
 
 @end
 
+#pragma mark - IOSGlassEffect Manager (Liquid Glass, iOS 26+)
+
+@interface RNIOSGlassEffectManager : RCTViewManager
+@end
+
+@implementation RNIOSGlassEffectManager
+
+RCT_EXPORT_MODULE(RNIOSGlassEffect)
+
+- (UIView *)view {
+  return [[RNIOSGlassEffectView alloc] init];
+}
+
+RCT_EXPORT_VIEW_PROPERTY(tintColor, UIColor, RNIOSGlassEffectView)
+RCT_CUSTOM_VIEW_PROPERTY(glassStyle, NSString, RNIOSGlassEffectView) {
+  [view setGlassStyle:json ?: @"regular"];
+}
+RCT_CUSTOM_VIEW_PROPERTY(isInteractive, BOOL, RNIOSGlassEffectView) {
+  view.isInteractive = json ? [RCTConvert BOOL:json] : NO;
+}
+
+@end
+
 NS_ASSUME_NONNULL_END

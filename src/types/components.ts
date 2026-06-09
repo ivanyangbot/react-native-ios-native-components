@@ -290,6 +290,28 @@ export interface IOSTooltipProps extends IOSNativeViewProps {
   targetId?: string;
 }
 
+// ─── IOSGlassEffect (UIGlassEffectView - Liquid Glass, iOS 26+) ─────────────
+
+/** Liquid Glass effect style (iOS 26.0+) */
+export type IOSGlassEffectStyle =
+  | 'regular'
+  | 'thin'
+  | 'ultraThin'
+  | 'regularWithBlur'
+  | 'thinWithBlur'
+  | 'ultraThinWithBlur';
+
+export interface IOSGlassEffectProps extends IOSNativeViewProps {
+  /** The glass material style to apply */
+  glassStyle?: IOSGlassEffectStyle;
+  /** Tint color applied to the glass */
+  tintColor?: ColorValue;
+  /** Whether the glass effect responds to user interaction (hover/tap) */
+  isInteractive?: boolean;
+  /** Content rendered inside the glass container */
+  children?: React.ReactNode;
+}
+
 // ─── IOSPullToRefresh / RefreshControl ───────────────────────────────────────
 
 export interface IOSPullToRefreshProps extends IOSNativeViewProps {
