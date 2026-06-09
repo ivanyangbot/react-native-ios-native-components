@@ -1,8 +1,8 @@
 # rn-ios-native-components
 
 [![npm version](https://img.shields.io/npm/v/rn-ios-native-components.svg)](https://www.npmjs.com/package/rn-ios-native-components)
-[![license](https://img.shields.io/npm/l/rn-ios-native-components.svg)](https://github.com/yourname/rn-ios-native-components/blob/main/LICENSE)
-[![platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android-blue.svg)](https://github.com/yourname/rn-ios-native-components)
+[![license](https://img.shields.io/npm/l/rn-ios-native-components.svg)](https://github.com/ivanyangbot/react-native-ios-native-components/blob/main/LICENSE)
+[![platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android-blue.svg)](https://github.com/ivanyangbot/react-native-ios-native-components)
 
 **All iOS native UIKit / HIG components, ready to use in React Native.**
 
@@ -28,17 +28,13 @@ yarn add rn-ios-native-components
 
 ### iOS Setup
 
-Add to your `ios/Podfile`:
-
-```ruby
-pod 'rn-ios-native-components', :path => '../node_modules/rn-ios-native-components'
-```
-
-Then run:
+React Native autolinking picks up the CocoaPods podspec automatically. After installing the package, run:
 
 ```bash
 cd ios && pod install && cd ..
 ```
+
+The package podspec provides the required Objective-C linker flags, so app-level `Podfile` changes are not needed.
 
 ## Quick Start
 

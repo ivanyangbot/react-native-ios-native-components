@@ -1,6 +1,6 @@
 {
   "name": "rn-ios-native-components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "iOS native UI components for React Native — all HIG/UIKit components wrapped and ready to use",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
