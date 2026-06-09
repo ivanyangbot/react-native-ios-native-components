@@ -3,6 +3,7 @@
  */
 
 import type { ColorValue, NativeSyntheticEvent } from 'react-native';
+import type { ReactNode } from 'react';
 import type {
   IOSNativeViewProps,
   IOSButtonType,
@@ -221,6 +222,10 @@ export interface IOSTabBarProps extends IOSNativeViewProps {
   onTabChange?: (event: NativeSyntheticEvent<{
     selectedIndex: number; item: IOSTabBarItem
   }>) => void;
+}
+
+export interface PlatformIOSTabBarProps extends IOSTabBarProps {
+  fallback?: ReactNode;
 }
 
 // ─── IOSNavigationBar ────────────────────────────────────────────────────────

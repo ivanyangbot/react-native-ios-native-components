@@ -13,6 +13,7 @@ export { default as IOSPageControl } from './IOSPageControl';
 export { default as IOSBadge } from './IOSBadge';
 export { default as IOSPullToRefresh } from './IOSPullToRefresh';
 export { default as IOSTabBar } from './IOSTabBar';
+export { default as PlatformIOSTabBar } from './PlatformIOSTabBar';
 export { default as IOSNavigationBar } from './IOSNavigationBar';
 export { default as IOSToolbar } from './IOSToolbar';
 export { default as IOSTextField } from './IOSTextField';

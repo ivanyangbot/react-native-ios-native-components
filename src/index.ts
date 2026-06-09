@@ -32,6 +32,7 @@ export type {
   IOSPageControlProps,
   IOSAlertProps,
   IOSTabBarProps,
+  PlatformIOSTabBarProps,
   IOSNavigationBarProps,
   IOSToolbarProps,
   IOSBadgeProps,
@@ -80,4 +81,3 @@ export type {
   IOSSelectionEvent,
   IOSPressEvent,
 } from './types/common';
-

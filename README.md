@@ -15,6 +15,7 @@ A comprehensive library that wraps every major iOS UIKit component as a React Na
 - **Full TypeScript** -- Strict types for all props and events, zero `any`
 - **SF Symbols support** -- All icon/image props accept SF Symbol names
 - **Android compatible** -- Graceful no-op fallback on Android (empty views)
+- **Platform-aware wrappers** -- `PlatformIOSTabBar` renders the native tab bar on iOS and `fallback`/`null` elsewhere
 - **Imperative APIs** -- `IOSAlert.show()` returns Promise for alert/action sheet
 
 ## Installation
@@ -123,6 +124,7 @@ await IOSAlert.show({
 |-----------|------------|-------------|
 | `IOSNavigationBar` | `UINavigationBar` | Navigation bar with items |
 | `IOSTabBar` | `UITabBar` | Tab bar with badges |
+| `PlatformIOSTabBar` | `UITabBar` / fallback | Native tab bar on iOS, fallback or `null` elsewhere |
 | `IOSSearchBar` | `UISearchBar` | Search input with scope buttons |
 | `IOSToolbar` | `UIToolbar` | Toolbar with flexible space |
 
@@ -235,6 +237,24 @@ console.log(result.textFieldValues?.[0]); // user-entered text
 />
 ```
 
+### PlatformIOSTabBar
+
+Use `PlatformIOSTabBar` when the same screen can render on non-iOS platforms. It renders the native `IOSTabBar` on iOS. On other platforms it returns `fallback`, or `null` when no fallback is provided.
+
+```tsx
+<PlatformIOSTabBar
+  items={[
+    { title: 'Home', icon: { systemName: 'house.fill' } },
+    { title: 'Messages', icon: { systemName: 'bubble.left.fill' }, badge: 12 },
+    { title: 'Profile', icon: { systemName: 'person.circle.fill' } },
+  ]}
+  selectedIndex={tabIndex}
+  tintColor="#007AFF"
+  onTabChange={(e) => setTabIndex(e.nativeEvent.selectedIndex)}
+  fallback={<AndroidTabBar selectedIndex={tabIndex} onChange={setTabIndex} />}
+/>
+```
+
 ### IOSWebView
 
 ```tsx
@@ -259,7 +279,7 @@ src/
   components/
     IOSButton.tsx           # requireNativeComponent wrapper
     IOSSwitch.tsx
-    ... (28 component files)
+    ... (30 component files)
 ios/
   RNIOSNativeComponents/
     RNIOSNativeComponentsViews.h     # UIView subclasses
@@ -305,6 +325,7 @@ MIT
 - **完整 TypeScript** -- 所有 Props 和事件都有严格类型，零 `any`
 - **SF Symbols 支持** -- 所有图标/图片属性接受 SF Symbols 名称
 - **Android 兼容** -- 在 Android 上优雅降级（空视图）
+- **平台感知包装组件** -- `PlatformIOSTabBar` 在 iOS 上渲染原生标签栏，在其他平台渲染 `fallback` 或 `null`
 - **命令式 API** -- `IOSAlert.show()` 返回 Promise，支持 Alert/ActionSheet
 
 ## 安装
@@ -413,6 +434,7 @@ await IOSAlert.show({
 |------|---------|------|
 | `IOSNavigationBar` | `UINavigationBar` | 导航栏 |
 | `IOSTabBar` | `UITabBar` | 标签栏 |
+| `PlatformIOSTabBar` | `UITabBar` / fallback | iOS 使用原生标签栏，其他平台使用 fallback 或 `null` |
 | `IOSSearchBar` | `UISearchBar` | 搜索栏 |
 | `IOSToolbar` | `UIToolbar` | 工具栏 |
 
@@ -495,6 +517,24 @@ const result = await IOSAlert.show({
 console.log(result.textFieldValues?.[0]); // 用户输入的文本
 ```
 
+### PlatformIOSTabBar
+
+当同一个页面需要运行在非 iOS 平台时，可以使用 `PlatformIOSTabBar`。它在 iOS 上渲染原生 `IOSTabBar`，其他平台渲染 `fallback`，未传 `fallback` 时返回 `null`。
+
+```tsx
+<PlatformIOSTabBar
+  items={[
+    { title: '首页', icon: { systemName: 'house.fill' } },
+    { title: '消息', icon: { systemName: 'bubble.left.fill' }, badge: 12 },
+    { title: '我的', icon: { systemName: 'person.circle.fill' } },
+  ]}
+  selectedIndex={tabIndex}
+  tintColor="#007AFF"
+  onTabChange={(e) => setTabIndex(e.nativeEvent.selectedIndex)}
+  fallback={<AndroidTabBar selectedIndex={tabIndex} onChange={setTabIndex} />}
+/>
+```
+
 ## 架构说明
 
 ```
@@ -507,7 +547,7 @@ src/
   components/
     IOSButton.tsx           # requireNativeComponent 封装
     IOSSwitch.tsx
-    ... (28 个组件文件)
+    ... (30 个组件文件)
 ios/
   RNIOSNativeComponents/
     RNIOSNativeComponentsViews.h     # UIView 子类
