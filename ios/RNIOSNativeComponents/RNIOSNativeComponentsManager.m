@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UISearchBarStyle)searchBarStyle:(id)json;
 + (UISegmentedControlStyle)segmentedControlStyle:(id)json;
 + (UIPageControlBackgroundStyle)pageControlBackgroundStyle:(id)json;
++ (UIBarStyle)tabBarStyle:(id)json;
 @end
 
 @implementation RCTConvert (RNIOSComponents)
@@ -91,6 +92,13 @@ NS_ASSUME_NONNULL_BEGIN
   if ([s isEqualToString:@"prominent"]) return UIPageControlBackgroundStyleProminent;
   if ([s isEqualToString:@"minimal"]) return UIPageControlBackgroundStyleMinimal;
   return UIPageControlBackgroundStyleAutomatic;
+}
+
++ (UIBarStyle)tabBarStyle:(id)json {
+  if (!json || ![json isKindOfClass:[NSString class]]) return UIBarStyleDefault;
+  NSString *s = (NSString *)json;
+  if ([s isEqualToString:@"black"]) return UIBarStyleBlack;
+  return UIBarStyleDefault;
 }
 
 @end
@@ -498,6 +506,50 @@ RCT_CUSTOM_VIEW_PROPERTY(currentPageIndicatorTintColor, UIColor, RNIOSPageContro
 }
 RCT_CUSTOM_VIEW_PROPERTY(showsPageIndicator, BOOL, RNIOSPageControl) {
   // showsPageIndicator is not a public API on UIPageControl; skip silently
+}
+
+@end
+
+#pragma mark - IOSTabBar Manager
+
+@interface RNIOSTabBarManager : RCTViewManager
+@end
+
+@implementation RNIOSTabBarManager
+
+RCT_EXPORT_MODULE(RNIOSTabBar)
+
+- (UIView *)view {
+  return [[RNIOSTabBar alloc] init];
+}
+
+RCT_EXPORT_VIEW_PROPERTY(onTabChange, RCTBubblingEventBlock)
+RCT_CUSTOM_VIEW_PROPERTY(items, NSArray, RNIOSTabBar) {
+  view.itemsConfig = json ?: @[];
+  [view reloadItems];
+}
+RCT_CUSTOM_VIEW_PROPERTY(selectedIndex, NSInteger, RNIOSTabBar) {
+  view.selectedIndex = json ? [RCTConvert NSInteger:json] : 0;
+  if (view.selectedIndex >= 0 && view.selectedIndex < (NSInteger)view.items.count) {
+    view.selectedItem = view.items[view.selectedIndex];
+  }
+}
+RCT_CUSTOM_VIEW_PROPERTY(tintColor, UIColor, RNIOSTabBar) {
+  view.tintColor = json ? [RCTConvert UIColor:json] : defaultView.tintColor;
+}
+RCT_CUSTOM_VIEW_PROPERTY(unselectedItemTintColor, UIColor, RNIOSTabBar) {
+  if (@available(iOS 10.0, *)) {
+    view.unselectedItemTintColor = json ? [RCTConvert UIColor:json] : defaultView.unselectedItemTintColor;
+  }
+}
+RCT_CUSTOM_VIEW_PROPERTY(barTintColor, UIColor, RNIOSTabBar) {
+  view.barTintColor = json ? [RCTConvert UIColor:json] : defaultView.barTintColor;
+}
+RCT_CUSTOM_VIEW_PROPERTY(isTranslucent, BOOL, RNIOSTabBar) {
+  view.translucent = json ? [RCTConvert BOOL:json] : defaultView.isTranslucent;
+}
+RCT_CUSTOM_VIEW_PROPERTY(barStyle, UIBarStyle, RNIOSTabBar) {
+  view.barStyle = json ? [RCTConvert tabBarStyle:json] : defaultView.barStyle;
 }
 
 @end

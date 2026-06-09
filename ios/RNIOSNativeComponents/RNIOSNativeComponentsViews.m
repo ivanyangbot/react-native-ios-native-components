@@ -190,6 +190,89 @@
 }
 @end
 
+#pragma mark - IOSTabBar
+
+@implementation RNIOSTabBar
+
+- (instancetype)initWithFrame:(CGRect)frame {
+  if (self = [super initWithFrame:frame]) {
+    self.delegate = self;
+    self.translucent = YES;
+    _itemsConfig = @[];
+    _selectedIndex = 0;
+  }
+  return self;
+}
+
+- (UIImage *)_imageFromConfig:(NSDictionary *)config selected:(BOOL)selected {
+  id imageConfig = selected ? config[@"selectedIcon"] : config[@"icon"];
+  if (![imageConfig isKindOfClass:[NSDictionary class]]) {
+    imageConfig = config[@"icon"];
+  }
+
+  NSString *systemName = [RCTConvert NSString:((NSDictionary *)imageConfig)[@"systemName"]];
+  if (systemName.length == 0) {
+    return nil;
+  }
+
+  UIImage *image = nil;
+  if (@available(iOS 13.0, *)) {
+    UIImageSymbolConfiguration *symbolConfig = [UIImageSymbolConfiguration configurationWithPointSize:22 weight:UIImageSymbolWeightRegular];
+    image = [UIImage systemImageNamed:systemName withConfiguration:symbolConfig];
+  }
+  return image;
+}
+
+- (void)reloadItems {
+  NSMutableArray<UITabBarItem *> *tabBarItems = [NSMutableArray arrayWithCapacity:self.itemsConfig.count];
+
+  [self.itemsConfig enumerateObjectsUsingBlock:^(NSDictionary *config, NSUInteger index, BOOL *stop) {
+    NSString *title = [RCTConvert NSString:config[@"title"]] ?: @"";
+    UIImage *image = [self _imageFromConfig:config selected:NO];
+    UIImage *selectedImage = [self _imageFromConfig:config selected:YES];
+    UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:title image:image selectedImage:selectedImage];
+
+    id badge = config[@"badge"];
+    if (badge && ![badge isKindOfClass:[NSNull class]]) {
+      NSString *badgeValue = [RCTConvert NSString:badge];
+      item.badgeValue = badgeValue.length > 0 ? badgeValue : nil;
+    }
+
+    if (@available(iOS 10.0, *)) {
+      id badgeColor = config[@"badgeColor"];
+      if (badgeColor && ![badgeColor isKindOfClass:[NSNull class]]) {
+        item.badgeColor = [RCTConvert UIColor:badgeColor];
+      }
+    }
+
+    item.tag = index;
+    [tabBarItems addObject:item];
+  }];
+
+  self.items = tabBarItems;
+  if (self.selectedIndex >= 0 && self.selectedIndex < (NSInteger)self.items.count) {
+    self.selectedItem = self.items[self.selectedIndex];
+  } else {
+    self.selectedItem = nil;
+  }
+}
+
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+  self.selectedIndex = item.tag;
+  NSDictionary *config = self.selectedIndex >= 0 && self.selectedIndex < (NSInteger)self.itemsConfig.count
+    ? self.itemsConfig[self.selectedIndex]
+    : @{};
+
+  if (self.onTabChange) {
+    self.onTabChange(@{
+      @"selectedIndex": @(self.selectedIndex),
+      @"item": config ?: @{}
+    });
+  }
+}
+
+@end
+
 #pragma mark - IOSBadge
 
 @implementation RNIOSBadgeView

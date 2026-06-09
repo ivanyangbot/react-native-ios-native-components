@@ -91,6 +91,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) RCTBubblingEventBlock onPageChange;
 @end
 
+#pragma mark - IOSTabBar
+
+@interface RNIOSTabBar : UITabBar<UITabBarDelegate>
+@property (nonatomic, strong) NSArray<NSDictionary *> *itemsConfig;
+@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, copy) RCTBubblingEventBlock onTabChange;
+- (void)reloadItems;
+@end
+
 #pragma mark - IOSBadge
 
 @interface RNIOSBadgeView : UIView
