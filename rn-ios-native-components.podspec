@@ -39,5 +39,11 @@ Pod::Spec.new do |s|
     "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
   }
 
+  # Keep Objective-C React Native view managers linked when CocoaPods builds
+  # this package as a static library.
+  s.user_target_xcconfig = {
+    "OTHER_LDFLAGS" => "$(inherited) -ObjC"
+  }
+
   install_modules_dependencies(s)
 end
