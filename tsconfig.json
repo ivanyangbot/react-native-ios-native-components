@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
+    "rootDir": "src",
     "paths": {
       "rn-ios-native-components": ["./src/index.ts"]
     },
@@ -29,5 +29,5 @@
     "sourceMap": true,
     "outDir": "lib/typescript"
   },
-  "exclude": ["lib", "node_modules", "ios", "android"]
+  "exclude": ["lib", "node_modules", "ios", "android", "example"]
 }
