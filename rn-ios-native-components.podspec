@@ -16,7 +16,9 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "13.0" }
   s.source       = { :git => package["repository"]["url"], :tag => s.version }
 
-  s.source_files = "ios/**/*.{h,m,mm,swift}"
+  s.source_files = "ios/**/*.{h,m,mm}"
+  # Swift Fabric sources excluded until Fabric API stabilizes
+  # s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   # React Native dependency
   s.dependency "React-Core"

@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIDatePickerStyle)datePickerStyle:(id)json;
 + (UIActivityIndicatorViewStyle)activityIndicatorStyle:(id)json;
 + (UIProgressViewStyle)progressViewStyle:(id)json;
-+ (UISearchBarStyle)searchBarStyle:(id)json);
++ (UISearchBarStyle)searchBarStyle:(id)json;
 + (UISegmentedControlStyle)segmentedControlStyle:(id)json;
 + (UIPageControlBackgroundStyle)pageControlBackgroundStyle:(id)json;
 @end
@@ -78,11 +78,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (UISegmentedControlStyle)segmentedControlStyle:(id)json {
-  if (!json || ![json isKindOfClass:[NSString class]]) return UISegmentedControlStyleAutomatic;
+  if (!json || ![json isKindOfClass:[NSString class]]) return UISegmentedControlStylePlain;
   NSString *s = (NSString *)json;
   if ([s isEqualToString:@"plain"]) return UISegmentedControlStylePlain;
   if ([s isEqualToString:@"bordered"]) return UISegmentedControlStyleBordered;
-  return UISegmentedControlStyleAutomatic;
+  return UISegmentedControlStylePlain;
 }
 
 + (UIPageControlBackgroundStyle)pageControlBackgroundStyle:(id)json {
@@ -180,22 +180,22 @@ RCT_EXPORT_MODULE(RNIOSSlider)
 RCT_EXPORT_VIEW_PROPERTY(onValueChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onSlidingComplete, RCTBubblingEventBlock)
 RCT_CUSTOM_VIEW_PROPERTY(value, CGFloat, RNIOSSlider) {
-  slider.value = json ? [RCTConvert CGFloat:json] : defaultView.value;
+  view.value = json ? [RCTConvert CGFloat:json] : defaultView.value;
 }
 RCT_CUSTOM_VIEW_PROPERTY(minimumValue, CGFloat, RNIOSSlider) {
-  slider.minimumValue = json ? [RCTConvert CGFloat:json] : defaultView.minimumValue;
+  view.minimumValue = json ? [RCTConvert CGFloat:json] : defaultView.minimumValue;
 }
 RCT_CUSTOM_VIEW_PROPERTY(maximumValue, CGFloat, RNIOSSlider) {
-  slider.maximumValue = json ? [RCTConvert CGFloat:json] : defaultView.maximumValue;
+  view.maximumValue = json ? [RCTConvert CGFloat:json] : defaultView.maximumValue;
 }
 RCT_CUSTOM_VIEW_PROPERTY(minimumTrackTintColor, UIColor, RNIOSSlider) {
-  slider.minimumTrackTintColor = json ? [RCTConvert UIColor:json] : defaultView.minimumTrackTintColor;
+  view.minimumTrackTintColor = json ? [RCTConvert UIColor:json] : defaultView.minimumTrackTintColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(maximumTrackTintColor, UIColor, RNIOSSlider) {
-  slider.maximumTrackTintColor = json ? [RCTConvert UIColor:json] : defaultView.maximumTrackTintColor;
+  view.maximumTrackTintColor = json ? [RCTConvert UIColor:json] : defaultView.maximumTrackTintColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(thumbTintColor, UIColor, RNIOSSlider) {
-  slider.thumbTintColor = json ? [RCTConvert UIColor:json] : defaultView.thumbTintColor;
+  view.thumbTintColor = json ? [RCTConvert UIColor:json] : defaultView.thumbTintColor;
 }
 
 @end
@@ -217,25 +217,25 @@ RCT_EXPORT_MODULE(RNIOSStepper)
 
 RCT_EXPORT_VIEW_PROPERTY(onValueChange, RCTBubblingEventBlock)
 RCT_CUSTOM_VIEW_PROPERTY(value, double, RNIOSStepper) {
-  stepper.value = json ? [RCTConvert double:json] : defaultView.value;
+  view.value = json ? [RCTConvert double:json] : defaultView.value;
 }
 RCT_CUSTOM_VIEW_PROPERTY(minimumValue, double, RNIOSStepper) {
-  stepper.minimumValue = json ? [RCTConvert double:json] : defaultView.minimumValue;
+  view.minimumValue = json ? [RCTConvert double:json] : defaultView.minimumValue;
 }
 RCT_CUSTOM_VIEW_PROPERTY(maximumValue, double, RNIOSStepper) {
-  stepper.maximumValue = json ? [RCTConvert double:json] : defaultView.maximumValue;
+  view.maximumValue = json ? [RCTConvert double:json] : defaultView.maximumValue;
 }
 RCT_CUSTOM_VIEW_PROPERTY(stepValue, double, RNIOSStepper) {
-  stepper.stepValue = json ? [RCTConvert double:json] : defaultView.stepValue;
+  view.stepValue = json ? [RCTConvert double:json] : defaultView.stepValue;
 }
 RCT_CUSTOM_VIEW_PROPERTY(wraps, BOOL, RNIOSStepper) {
-  stepper.wraps = json ? [RCTConvert BOOL:json] : defaultView.wraps;
+  view.wraps = json ? [RCTConvert BOOL:json] : defaultView.wraps;
 }
 RCT_CUSTOM_VIEW_PROPERTY(tintColor, UIColor, RNIOSStepper) {
-  stepper.tintColor = json ? [RCTConvert UIColor:json] : defaultView.tintColor;
+  view.tintColor = json ? [RCTConvert UIColor:json] : defaultView.tintColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(backgroundColor, UIColor, RNIOSStepper) {
-  stepper.backgroundColor = json ? [RCTConvert UIColor:json] : defaultView.backgroundColor;
+  view.backgroundColor = json ? [RCTConvert UIColor:json] : defaultView.backgroundColor;
 }
 
 @end
@@ -317,27 +317,27 @@ RCT_EXPORT_MODULE(RNIOSDatePicker)
 
 RCT_EXPORT_VIEW_PROPERTY(onDateChange, RCTBubblingEventBlock)
 RCT_CUSTOM_VIEW_PROPERTY(mode, UIDatePickerMode, RNIOSDatePicker) {
-  picker.datePickerMode = json ? [RCTConvert datePickerMode:json] : defaultView.datePickerMode;
+  view.datePickerMode = json ? [RCTConvert datePickerMode:json] : defaultView.datePickerMode;
 }
 RCT_CUSTOM_VIEW_PROPERTY(pickerStyle, UIDatePickerStyle, RNIOSDatePicker) {
   if (@available(iOS 13.4, *)) {
-    picker.preferredDatePickerStyle = json ? [RCTConvert datePickerStyle:json] : defaultView.preferredDatePickerStyle;
+    view.preferredDatePickerStyle = json ? [RCTConvert datePickerStyle:json] : defaultView.preferredDatePickerStyle;
   }
 }
 RCT_CUSTOM_VIEW_PROPERTY(minimumDate, NSDate, RNIOSDatePicker) {
-  if (json) picker.minimumDate = [RCTConvert NSDate:json];
+  if (json) view.minimumDate = [RCTConvert NSDate:json];
 }
 RCT_CUSTOM_VIEW_PROPERTY(maximumDate, NSDate, RNIOSDatePicker) {
-  if (json) picker.maximumDate = [RCTConvert NSDate:json];
+  if (json) view.maximumDate = [RCTConvert NSDate:json];
 }
 RCT_CUSTOM_VIEW_PROPERTY(locale, NSLocale, RNIOSDatePicker) {
-  if (json) picker.locale = [NSLocale localeWithLocaleIdentifier:json];
+  if (json) view.locale = [NSLocale localeWithLocaleIdentifier:json];
 }
 RCT_CUSTOM_VIEW_PROPERTY(timeZone, NSTimeZone, RNIOSDatePicker) {
-  if (json) picker.timeZone = [NSTimeZone timeZoneWithName:json];
+  if (json) view.timeZone = [NSTimeZone timeZoneWithName:json];
 }
 RCT_CUSTOM_VIEW_PROPERTY(countDownDuration, NSTimeInterval, RNIOSDatePicker) {
-  picker.countDownDuration = json ? [RCTConvert NSTimeInterval:json] : defaultView.countDownDuration;
+  view.countDownDuration = json ? [RCTConvert NSTimeInterval:json] : defaultView.countDownDuration;
 }
 
 @end
@@ -360,19 +360,19 @@ RCT_EXPORT_MODULE(RNIOSPicker)
 
 RCT_EXPORT_VIEW_PROPERTY(onValueChange, RCTBubblingEventBlock)
 RCT_CUSTOM_VIEW_PROPERTY(items, NSArray, RNIOSPickerView) {
-  pickerView.items = json ?: @[];
-  [pickerView reloadAllComponents];
+  view.items = json ?: @[];
+  [view reloadAllComponents];
 }
 RCT_CUSTOM_VIEW_PROPERTY(selectedIndex, NSInteger, RNIOSPickerView) {
   NSInteger idx = json ? [RCTConvert NSInteger:json] : 0;
-  if (idx >= 0 && idx < (NSInteger)pickerView.items.count) {
-    [pickerView selectRow:idx inComponent:0 animated:YES];
-    pickerView.selectedIndex = idx;
+  if (idx >= 0 && idx < (NSInteger)view.items.count) {
+    [view selectRow:idx inComponent:0 animated:YES];
+    view.selectedIndex = idx;
   }
 }
 RCT_CUSTOM_VIEW_PROPERTY(textColor, UIColor, RNIOSPickerView) {
   if (@available(iOS 13.0, *)) {
-    pickerView.tintColor = json ? [RCTConvert UIColor:json] : defaultView.tintColor;
+    view.tintColor = json ? [RCTConvert UIColor:json] : defaultView.tintColor;
   }
 }
 
@@ -391,37 +391,37 @@ RCT_EXPORT_MODULE(RNIOSSearchBar)
   return [[RNIOSSearchBar alloc] init];
 }
 
-RCT_EXPORT_VIEW_PROPERTY(onText, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onSearchButtonPress, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onCancelButtonPress, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onBookmarkButtonPress, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onScopeChange, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onChangeText, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onSearchButtonPress, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onCancelButtonPress, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onBookmarkButtonPress, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onScopeChange, RCTDirectEventBlock)
 RCT_CUSTOM_VIEW_PROPERTY(text, NSString, RNIOSSearchBar) {
-  searchBar.text = json ?: @"";
+  view.text = json ?: @"";
 }
 RCT_CUSTOM_VIEW_PROPERTY(placeholder, NSString, RNIOSSearchBar) {
-  searchBar.placeholder = json;
+  view.placeholder = json;
 }
 RCT_CUSTOM_VIEW_PROPERTY(barStyle, UISearchBarStyle, RNIOSSearchBar) {
-  searchBar.searchBarStyle = json ? [RCTConvert searchBarStyle:json] : defaultView.searchBarStyle;
+  view.searchBarStyle = json ? [RCTConvert searchBarStyle:json] : defaultView.searchBarStyle;
 }
 RCT_CUSTOM_VIEW_PROPERTY(showsCancelButton, BOOL, RNIOSSearchBar) {
-  searchBar.showsCancelButton = json ? [RCTConvert BOOL:json] : defaultView.showsCancelButton;
+  view.showsCancelButton = json ? [RCTConvert BOOL:json] : defaultView.showsCancelButton;
 }
 RCT_CUSTOM_VIEW_PROPERTY(showsBookmarkButton, BOOL, RNIOSSearchBar) {
-  searchBar.showsBookmarkButton = json ? [RCTConvert BOOL:json] : defaultView.showsBookmarkButton;
+  view.showsBookmarkButton = json ? [RCTConvert BOOL:json] : defaultView.showsBookmarkButton;
 }
 RCT_CUSTOM_VIEW_PROPERTY(barTintColor, UIColor, RNIOSSearchBar) {
-  searchBar.barTintColor = json ? [RCTConvert UIColor:json] : defaultView.barTintColor;
+  view.barTintColor = json ? [RCTConvert UIColor:json] : defaultView.barTintColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(tintColor, UIColor, RNIOSSearchBar) {
-  searchBar.tintColor = json ? [RCTConvert UIColor:json] : defaultView.tintColor;
+  view.tintColor = json ? [RCTConvert UIColor:json] : defaultView.tintColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(scopeButtonTitles, NSArray<NSString *>, RNIOSSearchBar) {
-  searchBar.scopeButtonTitles = json;
+  view.scopeButtonTitles = json;
 }
 RCT_CUSTOM_VIEW_PROPERTY(selectedScopeButtonIndex, NSInteger, RNIOSSearchBar) {
-  searchBar.selectedScopeButtonIndex = json ? [RCTConvert NSInteger:json] : 0;
+  view.selectedScopeButtonIndex = json ? [RCTConvert NSInteger:json] : 0;
 }
 
 @end
@@ -444,23 +444,23 @@ RCT_EXPORT_MODULE(RNIOSSegmentedControl)
 RCT_EXPORT_VIEW_PROPERTY(onValueChange, RCTBubblingEventBlock)
 RCT_CUSTOM_VIEW_PROPERTY(titles, NSArray<NSString *>, RNIOSSegmentedControl) {
   // Rebuild segments
-  while (segmentedControl.numberOfSegments > 0) {
-    [segmentedControl removeSegmentAtIndex:0 animated:NO];
+  while (view.numberOfSegments > 0) {
+    [view removeSegmentAtIndex:0 animated:NO];
   }
   for (NSString *title in (NSArray<NSString *> *)(json ?: @[])) {
-    [segmentedControl insertSegmentWithTitle:title atIndex:segmentedControl.numberOfSegments animated:NO];
+    [view insertSegmentWithTitle:title atIndex:view.numberOfSegments animated:NO];
   }
 }
 RCT_CUSTOM_VIEW_PROPERTY(selectedIndex, NSInteger, RNIOSSegmentedControl) {
-  segmentedControl.selectedSegmentIndex = json ? [RCTConvert NSInteger:json] : -1;
+  view.selectedSegmentIndex = json ? [RCTConvert NSInteger:json] : -1;
 }
 RCT_CUSTOM_VIEW_PROPERTY(selectedSegmentTintColor, UIColor, RNIOSSegmentedControl) {
   if (@available(iOS 13.0, *)) {
-    segmentedControl.selectedSegmentTintColor = json ? [RCTConvert UIColor:json] : defaultView.selectedSegmentTintColor;
+    view.selectedSegmentTintColor = json ? [RCTConvert UIColor:json] : defaultView.selectedSegmentTintColor;
   }
 }
 RCT_CUSTOM_VIEW_PROPERTY(isMomentary, BOOL, RNIOSSegmentedControl) {
-  segmentedControl.isMomentary = json ? [RCTConvert BOOL:json] : defaultView.isMomentary;
+  view.momentary = json ? [RCTConvert BOOL:json] : defaultView.isMomentary;
 }
 
 @end
@@ -482,24 +482,22 @@ RCT_EXPORT_MODULE(RNIOSPageControl)
 
 RCT_EXPORT_VIEW_PROPERTY(onPageChange, RCTBubblingEventBlock)
 RCT_CUSTOM_VIEW_PROPERTY(numberOfPages, NSInteger, RNIOSPageControl) {
-  pageControl.numberOfPages = json ? [RCTConvert NSInteger:json] : 0;
+  view.numberOfPages = json ? [RCTConvert NSInteger:json] : 0;
 }
 RCT_CUSTOM_VIEW_PROPERTY(currentPage, NSInteger, RNIOSPageControl) {
-  pageControl.currentPage = json ? [RCTConvert NSInteger:json] : 0;
+  view.currentPage = json ? [RCTConvert NSInteger:json] : 0;
 }
 RCT_CUSTOM_VIEW_PROPERTY(hidesForSinglePage, BOOL, RNIOSPageControl) {
-  pageControl.hidesForSinglePage = json ? [RCTConvert BOOL:json] : defaultView.hidesForSinglePage;
+  view.hidesForSinglePage = json ? [RCTConvert BOOL:json] : defaultView.hidesForSinglePage;
 }
 RCT_CUSTOM_VIEW_PROPERTY(pageIndicatorTintColor, UIColor, RNIOSPageControl) {
-  pageControl.pageIndicatorTintColor = json ? [RCTConvert UIColor:json] : defaultView.pageIndicatorTintColor;
+  view.pageIndicatorTintColor = json ? [RCTConvert UIColor:json] : defaultView.pageIndicatorTintColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(currentPageIndicatorTintColor, UIColor, RNIOSPageControl) {
-  pageControl.currentPageIndicatorTintColor = json ? [RCTConvert UIColor:json] : defaultView.currentPageIndicatorTintColor;
+  view.currentPageIndicatorTintColor = json ? [RCTConvert UIColor:json] : defaultView.currentPageIndicatorTintColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(showsPageIndicator, BOOL, RNIOSPageControl) {
-  if (@available(iOS 14.0, *)) {
-    pageControl.showsPageIndicator = json ? [RCTConvert BOOL:json] : defaultView.showsPageIndicator;
-  }
+  // showsPageIndicator is not a public API on UIPageControl; skip silently
 }
 
 @end
@@ -518,18 +516,18 @@ RCT_EXPORT_MODULE(RNIOSBadge)
 }
 
 RCT_CUSTOM_VIEW_PROPERTY(text, id, RNIOSBadgeView) {
-  badgeView.badgeLabel.text = json != nil ? [RCTConvert NSString:json] : nil;
-  badgeView.hidden = (json == nil || [@"" isEqual:[RCTConvert NSString:json]]);
-  [badgeView setNeedsLayout];
+  view.badgeLabel.text = json != nil ? [RCTConvert NSString:json] : nil;
+  view.hidden = (json == nil || [@"" isEqual:[RCTConvert NSString:json]]);
+  [view setNeedsLayout];
 }
 RCT_CUSTOM_VIEW_PROPERTY(badgeColor, UIColor, RNIOSBadgeView) {
-  badgeView.badgeLabel.backgroundColor = json ? [RCTConvert UIColor:json] : defaultView.badgeLabel.backgroundColor;
+  view.badgeLabel.backgroundColor = json ? [RCTConvert UIColor:json] : defaultView.badgeLabel.backgroundColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(textColor, UIColor, RNIOSBadgeView) {
-  badgeView.badgeLabel.textColor = json ? [RCTConvert UIColor:json] : defaultView.badgeLabel.textColor;
+  view.badgeLabel.textColor = json ? [RCTConvert UIColor:json] : defaultView.badgeLabel.textColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(hidden, BOOL, RNIOSBadgeView) {
-  badgeView.hidden = json ? [RCTConvert BOOL:json] : defaultView.hidden;
+  view.hidden = json ? [RCTConvert BOOL:json] : defaultView.hidden;
 }
 
 @end
@@ -551,21 +549,19 @@ RCT_EXPORT_MODULE(RNIOSRefreshControl)
 
 RCT_EXPORT_VIEW_PROPERTY(onRefresh, RCTDirectEventBlock)
 RCT_CUSTOM_VIEW_PROPERTY(refreshing, BOOL, RNIOSRefreshControl) {
-  if (json && [RCTConvert BOOL:json]) { [refreshControl beginRefreshing]; }
-  else { [refreshControl endRefreshing]; }
+  if (json && [RCTConvert BOOL:json]) { [view beginRefreshing]; }
+  else { [view endRefreshing]; }
 }
 RCT_CUSTOM_VIEW_PROPERTY(tintColor, UIColor, RNIOSRefreshControl) {
-  refreshControl.tintColor = json ? [RCTConvert UIColor:json] : defaultView.tintColor;
+  view.tintColor = json ? [RCTConvert UIColor:json] : defaultView.tintColor;
 }
 RCT_CUSTOM_VIEW_PROPERTY(titleColor, UIColor, RNIOSRefreshControl) {
-  refreshControl.attributedTitle = json
+  view.attributedTitle = json
     ? [[NSAttributedString alloc] initWithString:@"" attributes:@{ NSForegroundColorAttributeName: [RCTConvert UIColor:json] }]
     : nil;
 }
 RCT_CUSTOM_VIEW_PROPERTY(progressBackgroundColor, UIColor, RNIOSRefreshControl) {
-  if (@available(iOS 10.0, *)) {
-    refreshControl.backgroundColor = json ? [RCTConvert UIColor:json] : defaultView.backgroundColor;
-  }
+  view.backgroundColor = json ? [RCTConvert UIColor:json] : defaultView.backgroundColor;
 }
 
 @end
@@ -583,12 +579,14 @@ RCT_EXPORT_MODULE(RNIOSGlassEffect)
   return [[RNIOSGlassEffectView alloc] init];
 }
 
-RCT_EXPORT_VIEW_PROPERTY(tintColor, UIColor, RNIOSGlassEffectView)
 RCT_CUSTOM_VIEW_PROPERTY(glassStyle, NSString, RNIOSGlassEffectView) {
   [view setGlassStyle:json ?: @"regular"];
 }
 RCT_CUSTOM_VIEW_PROPERTY(isInteractive, BOOL, RNIOSGlassEffectView) {
-  view.isInteractive = json ? [RCTConvert BOOL:json] : NO;
+  [view setIsInteractive:json ? [RCTConvert BOOL:json] : NO];
+}
+RCT_CUSTOM_VIEW_PROPERTY(tintColor, UIColor, RNIOSGlassEffectView) {
+  [view setTintColor:json ? [RCTConvert UIColor:json] : nil];
 }
 
 @end

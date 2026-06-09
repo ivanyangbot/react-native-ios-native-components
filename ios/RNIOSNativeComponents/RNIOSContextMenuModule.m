@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import <React/RCTBridgeModule.h>
+#import <React/RCTConvert.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,7 +46,7 @@ RCT_EXPORT_METHOD(show:(NSDictionary *)config
       [elements addObject:action];
     }
     
-    UIMenu *menu = [UIMenu title:@"" children:elements];
+    UIMenu *menu = [UIMenu menuWithTitle:@"" image:nil identifier:nil options:0 children:elements];
     
     // Present as a context menu interaction on the target view
     // In practice, this would be attached to a specific UIView via UIContextMenuInteraction

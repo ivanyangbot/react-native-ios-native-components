@@ -290,16 +290,10 @@ export interface IOSTooltipProps extends IOSNativeViewProps {
   targetId?: string;
 }
 
-// ─── IOSGlassEffect (UIGlassEffectView - Liquid Glass, iOS 26+) ─────────────
+// ─── IOSGlassEffect (UIVisualEffectView + UIGlassEffect, iOS 26+) ─────────────
 
-/** Liquid Glass effect style (iOS 26.0+) */
-export type IOSGlassEffectStyle =
-  | 'regular'
-  | 'thin'
-  | 'ultraThin'
-  | 'regularWithBlur'
-  | 'thinWithBlur'
-  | 'ultraThinWithBlur';
+/** Liquid Glass effect style (iOS 26.0+). Only 'regular' and 'clear' are supported by the native API. */
+export type IOSGlassEffectStyle = 'regular' | 'clear';
 
 export interface IOSGlassEffectProps extends IOSNativeViewProps {
   /** The glass material style to apply */
